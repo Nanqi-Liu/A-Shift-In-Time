@@ -219,7 +219,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 2
-      m_TileSpriteIndex: 11
+      m_TileSpriteIndex: 12
       m_TileMatrixIndex: 0
       m_TileColorIndex: 6
       m_TileObjectToInstantiateIndex: 65535
@@ -1656,10 +1656,10 @@ Tilemap:
     m_Data: {fileID: 1009396370, guid: 08f78968bad7279428eee817d60577c8, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 1532950074, guid: 08f78968bad7279428eee817d60577c8, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1807130171, guid: 08f78968bad7279428eee817d60577c8, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1807130171, guid: 08f78968bad7279428eee817d60577c8, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 399448295, guid: 08f78968bad7279428eee817d60577c8, type: 3}
   - m_RefCount: 1
@@ -1927,6 +1927,8 @@ GameObject:
   - component: {fileID: 1200620561}
   - component: {fileID: 1200620563}
   - component: {fileID: 1200620564}
+  - component: {fileID: 1200620565}
+  - component: {fileID: 1200620566}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2073,6 +2075,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1200620565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200620560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d08291599c83bc446b19be8c9e582d83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: 0
+  jumpFlag: 0
+--- !u!114 &1200620566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200620560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce40867f5b2e6e945ad62b913ec0002a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
