@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shockwave
+  m_Name: SpriteChangeable
   m_Shader: {fileID: -6465566751694194690, guid: bb90edf446817a64082c18e8f193ff5f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,10 +44,10 @@ Material:
     - _EdgeSmooth: 0.1
     - _Inverted: 0
     - _Magnification: 0.1
-    - _Radius: 0.99
+    - _Radius: 0
     - _Size: 0
     m_Colors:
-    - _FocalPoint: {r: -9, g: -5, b: 0, a: 0}
+    - _FocalPoint: {r: 0, g: 0, b: 0, a: 0}
     - _ScreenTileSize: {r: 10, g: 5.5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1028608195249683865

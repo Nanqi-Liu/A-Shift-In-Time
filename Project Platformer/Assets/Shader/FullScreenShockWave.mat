@@ -38,8 +38,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Magnification: -0.1
-    - _Radius: 0
-    - _Size: 0
+    - _Radius: 2
+    - _Size: 0.15
     - _SizeRatio: 1.777778
     m_Colors:
     - _FocalPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
