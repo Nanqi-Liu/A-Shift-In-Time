@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 
 public class ShaderController : MonoBehaviour
 {
-    [SerializeField]
     PlayerControls inputActions;
+
+    [SerializeField]
+    private Transform playerTransform;
     [SerializeField]
     private FullScreenPassRendererFeature _fullScreenShockwaveEffect;
     [SerializeField]
@@ -15,10 +17,13 @@ public class ShaderController : MonoBehaviour
     [SerializeField]
     private float _effectDuration = 1f;
 
-    private Material _fullScreenEffectMaterial;
+    private Material _fullScreenShockwaveEffectMaterial;
 
     private int _shaderRadiusID = Shader.PropertyToID("_Radius");
     private int _spriteShaderInvertedID = Shader.PropertyToID("_Inverted");
+    private int _shaderFocalPointID = Shader.PropertyToID("_FocalPoint");
+
+    private bool _isShaderTransformationRunning = false;
 
     // Debug Variables
     private IEnumerator _lastCo;
@@ -27,7 +32,7 @@ public class ShaderController : MonoBehaviour
     {
         inputActions = new PlayerControls();
         _fullScreenShockwaveEffect.SetActive(false);
-        _fullScreenEffectMaterial = _fullScreenShockwaveEffect.passMaterial;
+        _fullScreenShockwaveEffectMaterial = _fullScreenShockwaveEffect.passMaterial;
     }
 
     private void OnEnable()
@@ -46,23 +51,36 @@ public class ShaderController : MonoBehaviour
     {
         Debug.Log("Start Shader");
         if (_lastCo != null)
+        {
             StopCoroutine(_lastCo);
+            if (_isShaderTransformationRunning)
+            {
+                int inverted = _spriteChangeableMaterial.GetInt(_spriteShaderInvertedID);
+                _spriteChangeableMaterial.SetInt(_spriteShaderInvertedID, 1 - inverted);
+            }
+            _isShaderTransformationRunning = false;
+        }
+            
         _lastCo = ShaderTransformation();
         StartCoroutine(_lastCo);
     }
 
     private IEnumerator ShaderTransformation()
     {
+        _isShaderTransformationRunning = true;
         _fullScreenShockwaveEffect.SetActive(true);
+
+        _spriteChangeableMaterial.SetVector(_shaderFocalPointID, playerTransform.position);
+        _fullScreenShockwaveEffectMaterial.SetVector(_shaderFocalPointID, Camera.main.WorldToViewportPoint(playerTransform.position));
 
         float elapsedTime = 0f;
         while (elapsedTime < _effectDuration)
         {
             elapsedTime += Time.fixedDeltaTime;
-            Debug.Log(elapsedTime);
+            //Debug.Log(elapsedTime);
 
             float radius = Mathf.Lerp(0, 1, (elapsedTime / _effectDuration));
-            _fullScreenEffectMaterial.SetFloat(_shaderRadiusID, radius * 2);
+            _fullScreenShockwaveEffectMaterial.SetFloat(_shaderRadiusID, radius * 2);
             _spriteChangeableMaterial.SetFloat(_shaderRadiusID, radius);
 
             yield return null;
@@ -71,6 +89,8 @@ public class ShaderController : MonoBehaviour
         int inverted = _spriteChangeableMaterial.GetInt(_spriteShaderInvertedID);
         _spriteChangeableMaterial.SetFloat(_shaderRadiusID, 0);
         _spriteChangeableMaterial.SetInt(_spriteShaderInvertedID, 1 - inverted);
+
+        _isShaderTransformationRunning = false;
         yield return null;
     }
 }

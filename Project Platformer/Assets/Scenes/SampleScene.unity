@@ -2093,6 +2093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6186180720e192e42a800eee7060ec0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1200620562}
   _fullScreenShockwaveEffect: {fileID: 2464328576479380644, guid: e71aecdaae59d774b8e64b90984bf148, type: 2}
   _spriteChangeableMaterial: {fileID: 2100000, guid: 5dbce2bb53b7e0a4f9467a4b451096ea, type: 2}
   _effectDuration: 1
