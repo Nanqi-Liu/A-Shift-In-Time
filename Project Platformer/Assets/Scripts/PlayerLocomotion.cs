@@ -26,6 +26,11 @@ public class PlayerLocomotion : MonoBehaviour
     [SerializeField]
     private float _wallJumpDuration = 0.4f;
     private float _wallJumpDirection;
+    [SerializeField]
+    private float _wallJumpTimeWindow = 0.2f;
+    private float _wallJumpTimeCounter;
+    [SerializeField]
+    private Vector2 _wallJumpForce;
 
     private void Awake()
     {
@@ -87,7 +92,7 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleWallSlide(float movementInput, bool isWalled, bool isGrounded)
     {
-        if(isWalled && !isGrounded && movementInput != 0)
+        if(isWalled && !isGrounded)
         {
             _playerManager.isWallSliding = true;
             _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -_wallSlideSpeed, float.MaxValue));
@@ -104,15 +109,20 @@ public class PlayerLocomotion : MonoBehaviour
         {
             _playerManager.isWallJumping = false;
             _wallJumpDirection = -transform.localScale.x;
+            _wallJumpTimeCounter = _wallJumpTimeWindow;
 
             CancelInvoke(nameof(StopWallJump));
         }
+        else
+        {
+            _wallJumpTimeCounter -= Time.deltaTime;
+        }
 
-        if (_playerManager.isWallSliding && jumpFlag)
+        if (_wallJumpTimeCounter > 0 && jumpFlag)
         {
             Debug.Log("WallJump");
             _playerManager.isWallJumping = true;
-            _rb.velocity = new Vector2(_wallJumpDirection * 5f, _maxJumpForce);
+            _rb.velocity = new Vector2(_wallJumpDirection * _wallJumpForce.x, _maxJumpForce * _wallJumpForce.y);
 
             if (transform.localScale.x != _wallJumpDirection)
             {

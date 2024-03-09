@@ -25,7 +25,6 @@ public class ShaderController : MonoBehaviour
 
     private bool _isShaderTransformationRunning = false;
 
-    // Debug Variables
     private IEnumerator _lastCo;
 
     private void Awake()

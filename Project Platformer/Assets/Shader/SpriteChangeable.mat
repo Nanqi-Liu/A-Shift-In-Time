@@ -42,12 +42,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _EdgeSmooth: 0.1
-    - _Inverted: 0
+    - _Inverted: 1
     - _Magnification: 0.1
     - _Radius: 0
     - _Size: 0
     m_Colors:
-    - _FocalPoint: {r: -6.0000052, g: 5.1410527, b: 1, a: 0}
+    - _FocalPoint: {r: 21.50001, g: -0.21968755, b: 1, a: 0}
     - _ScreenTileSize: {r: 10, g: 5.5, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1028608195249683865
