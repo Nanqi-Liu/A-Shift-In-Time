@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 484620028}
   - component: {fileID: 484620030}
   - component: {fileID: 484620029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2124,8 +2124,10 @@ GameObject:
   - component: {fileID: 1200620561}
   - component: {fileID: 1200620563}
   - component: {fileID: 1200620564}
+  - component: {fileID: 1200620568}
   - component: {fileID: 1200620565}
   - component: {fileID: 1200620566}
+  - component: {fileID: 1200620567}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2215,7 +2217,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2236,7 +2238,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1200620560}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b04792f2a2c480941a8aec92280d63d0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2299,8 +2301,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce40867f5b2e6e945ad62b913ec0002a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpHeight: 2
+  _moveSpeed: 5
+  _jumpHeight: 2.5
+  _jumpCutOffGravityMultiplier: 3
+  _wallSlideSpeed: 3
+  _wallJumpDuration: 0.2
+--- !u!114 &1200620567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200620560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433ad6d1823bcdc4d8eddb258427baf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _boxSize: {x: 0.9, y: 0.2}
+  _groundCastDistance: 0.51
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _wallCheckRadius: 0.2
+  _wallCastDistance: 0.48
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!114 &1200620568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200620560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc0425c1f4a09542811cc65303858ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFacingRight: 1
+  isGrounded: 0
+  isWalled: 0
+  isWallSliding: 0
+  isWallJumping: 0
+  _coyoteTime: 0.2
+  coyoteTimeCounter: 0
+  _jumpBufferTime: 0.2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

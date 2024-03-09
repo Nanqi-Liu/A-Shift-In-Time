@@ -5,29 +5,134 @@ using UnityEngine;
 public class PlayerLocomotion : MonoBehaviour
 {
     private Rigidbody2D _rb;
-    private InputHandler inputHandler;
+    private PlayerManager _playerManager;
+
+    private float gravityScale;
 
     [Header("Movement Stats")]
     [SerializeField]
-    float moveSpeed = 5f;
+    private float _moveSpeed = 5f;
+
+    [Header("Jump Stats")]
+    [SerializeField]
+    private float _jumpHeight = 2.5f;
+    [SerializeField]
+    private float _jumpCutOffGravityMultiplier = 3f;
+    private float _maxJumpForce;
+
+    [SerializeField]
+    private float _wallSlideSpeed = 3f;
+
+    [SerializeField]
+    private float _wallJumpDuration = 0.4f;
+    private float _wallJumpDirection;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        inputHandler = GetComponent<InputHandler>();
+        _playerManager = GetComponent<PlayerManager>();
     }
 
-    private void FixedUpdate()
+    private void Start()
     {
-        HandleMovement();
-        // HandleJump();
-        // HandleFall();
+        gravityScale = _rb.gravityScale;
+        _maxJumpForce = Mathf.Sqrt(2 * Physics2D.gravity.magnitude * _rb.gravityScale * _jumpHeight);
     }
 
-    private void HandleMovement()
+    public void HandleMovement(float movementInput)
     {
-        Vector2 targetVelocity = Vector2.zero;
-        targetVelocity.x = moveSpeed * inputHandler.movement;
-        _rb.velocity = targetVelocity;
+        // Movement
+        if (!_playerManager.isWallJumping)
+        {
+            _rb.velocity = new Vector2(_moveSpeed * movementInput, _rb.velocity.y);
+        }
+    }
+
+    public void HandleFlip(float movementInput)
+    {
+
+        if (((movementInput > 0 && !_playerManager.isFacingRight) || (movementInput < 0 && _playerManager.isFacingRight))
+            && !_playerManager.isWallJumping)
+        {
+            Flip();
+        }
+    }
+
+    public void HandleJump(bool jumpFlag, bool isJumpPerforming)
+    {
+        if (jumpFlag && _playerManager.coyoteTimeCounter > 0)
+        {
+            Debug.Log("JUMP");
+            _playerManager.coyoteTimeCounter = 0;
+            _rb.velocity = new Vector2(_rb.velocity.x, _maxJumpForce);
+        }
+
+        // Jump cut off when releasing jump key mid jump
+        if (_rb.velocity.y > 0.01f)
+        {
+            if (isJumpPerforming)
+            {
+                _rb.gravityScale = gravityScale * 1f;
+            }
+            else
+            {
+                _rb.gravityScale = gravityScale * _jumpCutOffGravityMultiplier;
+            }
+        }
+        else
+        {
+            _rb.gravityScale = gravityScale * 1f;
+        }
+    }
+
+    public void HandleWallSlide(float movementInput, bool isWalled, bool isGrounded)
+    {
+        if(isWalled && !isGrounded && movementInput != 0)
+        {
+            _playerManager.isWallSliding = true;
+            _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -_wallSlideSpeed, float.MaxValue));
+        }
+        else
+        {
+            _playerManager.isWallSliding = false;
+        }
+    }
+
+    public void HandleWallJump(bool jumpFlag)
+    {
+        if (_playerManager.isWallSliding)
+        {
+            _playerManager.isWallJumping = false;
+            _wallJumpDirection = -transform.localScale.x;
+
+            CancelInvoke(nameof(StopWallJump));
+        }
+
+        if (_playerManager.isWallSliding && jumpFlag)
+        {
+            Debug.Log("WallJump");
+            _playerManager.isWallJumping = true;
+            _rb.velocity = new Vector2(_wallJumpDirection * 5f, _maxJumpForce);
+
+            if (transform.localScale.x != _wallJumpDirection)
+            {
+                Flip();
+            }
+
+            Invoke(nameof(StopWallJump), _wallJumpDuration);
+        }
+    }
+
+    private void StopWallJump()
+    {
+        _playerManager.isWallJumping = false;
+    }
+
+    private void Flip()
+    {
+        _playerManager.isFacingRight = !_playerManager.isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
     }
 }

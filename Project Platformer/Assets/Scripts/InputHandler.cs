@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class InputHandler : MonoBehaviour
@@ -10,9 +11,10 @@ public class InputHandler : MonoBehaviour
 
     public float movement;
 
-    public bool jumpFlag;
+    private InputAction _moveInputAction, _jumpInputAction;
 
-    private InputAction _moveInputAction;
+    public bool jumpFlag;
+    public bool isJumpPerforming;
 
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class InputHandler : MonoBehaviour
     private void OnEnable()
     {
         _moveInputAction = inputActions.Player.Movement;
+        _jumpInputAction = inputActions.Player.Jump;
 
         inputActions.Player.Jump.performed += OnJump;
 
@@ -35,9 +38,25 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Disable();
     }
 
-    private void Update()
+    public void TickInput()
+    {
+        MoveInput();
+        JumpInput();
+    }
+
+    private void MoveInput()
     {
         movement = _moveInputAction.ReadValue<float>();
+    }
+
+    private void JumpInput()
+    {
+        isJumpPerforming = _jumpInputAction.phase == UnityEngine.InputSystem.InputActionPhase.Performed ? true : false;
+    }
+
+    private void Update()
+    {
+        TickInput();
     }
 
     private void OnJump(InputAction.CallbackContext obj)
