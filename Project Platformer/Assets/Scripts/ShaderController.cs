@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.InputSystem;
 
 public class ShaderController : MonoBehaviour
 {
-    PlayerControls inputActions;
-
     [SerializeField]
     private Transform playerTransform;
     [SerializeField]
@@ -29,24 +26,18 @@ public class ShaderController : MonoBehaviour
 
     private void Awake()
     {
-        inputActions = new PlayerControls();
         _fullScreenShockwaveEffect.SetActive(false);
         _fullScreenShockwaveEffectMaterial = _fullScreenShockwaveEffect.passMaterial;
     }
 
-    private void OnEnable()
+    public void InitShaders()
     {
-        inputActions.Test.Switch.performed += StartShaderTransformation;
-        inputActions.Test.Switch.Enable();
+        _spriteChangeableMaterial.SetInt(_spriteShaderInvertedID, 0);
+        _spriteChangeableMaterial.SetFloat(_shaderRadiusID, 0);
+        _fullScreenShockwaveEffect.SetActive(false);
     }
 
-    private void OnDisable()
-    {
-        inputActions.Test.Switch.performed -= StartShaderTransformation;
-        inputActions.Test.Switch.Disable();
-    }
-
-    void StartShaderTransformation(InputAction.CallbackContext obj)
+    public void StartShaderTransformation()
     {
         Debug.Log("Start Shader");
         if (_lastCo != null)

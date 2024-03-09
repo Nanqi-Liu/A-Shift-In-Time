@@ -1,0 +1,84 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
+
+public class TimeshiftManager : MonoBehaviour
+{
+    public static TimeshiftManager instance;
+    PlayerControls inputActions;
+
+    private ShaderController shaderController;
+
+    [SerializeField]
+    private GameObject _presentTilemap;
+    [SerializeField]
+    private GameObject _futureTilemap;
+    [SerializeField]
+    private Transform _playerTransform;
+
+    private TilemapCollider2D _tcPresent;
+    private TilemapCollider2D _tcFuture;
+
+    public bool isFuture;
+    private void Awake()
+    {
+        instance = this;
+        inputActions = new PlayerControls();
+        shaderController = GetComponent<ShaderController>(); 
+    }
+
+    private void Start()
+    {
+        _tcPresent = _presentTilemap.GetComponent<TilemapCollider2D>();
+        _tcFuture = _futureTilemap.GetComponent<TilemapCollider2D>();
+
+        _tcFuture.enabled = false;
+        shaderController.InitShaders();
+    }
+
+
+    //private void OnEnable()
+    //{
+    //    inputActions.Test.Switch.performed += StartShaderTransformation;
+    //    inputActions.Test.Switch.Enable();
+    //}
+
+    //private void OnDisable()
+    //{
+    //    inputActions.Test.Switch.performed -= StartShaderTransformation;
+    //    inputActions.Test.Switch.Disable();
+    //}
+
+    public void ShiftTime()
+    {
+        TilemapCollider2D enabledCollider;
+        if (isFuture)
+        {
+            isFuture = false;
+            _tcPresent.enabled = true;
+            _tcFuture.enabled = false;
+
+            enabledCollider = _tcPresent;
+        }
+        else
+        {
+            isFuture = true;
+            _tcPresent.enabled = false;
+            _tcFuture.enabled = true;
+
+            enabledCollider = _tcFuture;
+        }
+
+        // Get player out if player clip in
+        if (enabledCollider.composite.bounds.Contains((Vector2)_playerTransform.position))
+        {
+            Vector2 edgePoint = enabledCollider.composite.ClosestPoint(_playerTransform.position);
+            Vector2 newPosition = edgePoint + (edgePoint - (Vector2)_playerTransform.position).normalized * 0.1f;
+            _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
+        }
+
+        shaderController.StartShaderTransformation();
+    }
+}

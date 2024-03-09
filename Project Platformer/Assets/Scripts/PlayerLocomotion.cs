@@ -67,7 +67,7 @@ public class PlayerLocomotion : MonoBehaviour
     {
         if (jumpFlag && _playerManager.coyoteTimeCounter > 0)
         {
-            Debug.Log("JUMP");
+            _playerManager.JumpCallBack();
             _playerManager.coyoteTimeCounter = 0;
             _rb.velocity = new Vector2(_rb.velocity.x, _maxJumpForce);
         }
@@ -120,7 +120,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         if (_wallJumpTimeCounter > 0 && jumpFlag)
         {
-            Debug.Log("WallJump");
+            _playerManager.WallJumpCallBack();
             _playerManager.isWallJumping = true;
             _rb.velocity = new Vector2(_wallJumpDirection * _wallJumpForce.x, _maxJumpForce * _wallJumpForce.y);
 
