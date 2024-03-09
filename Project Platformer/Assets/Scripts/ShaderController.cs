@@ -39,7 +39,7 @@ public class ShaderController : MonoBehaviour
 
     public void StartShaderTransformation()
     {
-        Debug.Log("Start Shader");
+        //Debug.Log("Start Shader");
         if (_lastCo != null)
         {
             StopCoroutine(_lastCo);

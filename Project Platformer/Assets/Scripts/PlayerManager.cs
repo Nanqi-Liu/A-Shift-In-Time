@@ -10,7 +10,6 @@ public class PlayerManager : MonoBehaviour
 
     public bool isFacingRight = true;
     public bool isGrounded;
-    public bool isWalled;
     public bool isWallSliding;
     public bool isWallJumping;
 
@@ -50,14 +49,13 @@ public class PlayerManager : MonoBehaviour
         {
             isGrounded = true;
             coyoteTimeCounter = _coyoteTime;
+            playerLocomotion._wallJumpTimeCounter = 0;
         }
         else
         {
             isGrounded = false;
             coyoteTimeCounter -= delta;
         }
-
-        playerDetection.WallDetection(ref isWalled, isFacingRight);
     }
 
     private void Locomotions()
@@ -65,7 +63,7 @@ public class PlayerManager : MonoBehaviour
         playerLocomotion.HandleMovement(inputHandler.movement);
         playerLocomotion.HandleFlip(inputHandler.movement);
         playerLocomotion.HandleJump(_jumpBufferTimeCounter > 0, inputHandler.isJumpPerforming);
-        playerLocomotion.HandleWallSlide(inputHandler.movement, isWalled, isGrounded);
+        playerLocomotion.HandleWallSlide(inputHandler.movement, isGrounded);
         playerLocomotion.HandleWallJump(inputHandler.jumpFlag);
     }
 
@@ -77,6 +75,11 @@ public class PlayerManager : MonoBehaviour
         }
 
         _jumpBufferTimeCounter -= Time.deltaTime;
+    }
+
+    public bool IsWalled()
+    {
+        return playerDetection.WallDetection(transform.localScale.x > 0);
     }
 
     public void JumpCallBack()

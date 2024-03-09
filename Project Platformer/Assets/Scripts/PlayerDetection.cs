@@ -27,19 +27,13 @@ public class PlayerDetection : MonoBehaviour
         return Physics2D.BoxCast(transform.position, _boxSize, 0, -transform.up, _groundCastDistance, _groundLayer);
     }
 
-    public void WallDetection(ref bool isWalled, bool isFacingRight)
+    public bool WallDetection(bool isFacingRight)
     {
         this.isFacingRight = isFacingRight;
-        if (Physics2D.CircleCast(transform.position, _wallCheckRadius,
+        return (Physics2D.CircleCast(transform.position, _wallCheckRadius,
             isFacingRight ? transform.right : -transform.right,
-            _wallCastDistance, _wallLayer))
-        {
-            isWalled = true;
-        }
-        else
-        {
-            isWalled = false;
-        }
+            _wallCastDistance, _wallLayer));
+        
     }
 
     private void OnDrawGizmos()

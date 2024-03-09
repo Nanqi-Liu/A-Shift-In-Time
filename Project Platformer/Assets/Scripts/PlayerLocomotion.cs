@@ -20,15 +20,16 @@ public class PlayerLocomotion : MonoBehaviour
     private float _jumpCutOffGravityMultiplier = 3f;
     private float _maxJumpForce;
 
+    [Header("Wall Jump Stats")]
     [SerializeField]
     private float _wallSlideSpeed = 3f;
 
     [SerializeField]
     private float _wallJumpDuration = 0.4f;
-    private float _wallJumpDirection;
+    public float _wallJumpDirection;
     [SerializeField]
     private float _wallJumpTimeWindow = 0.2f;
-    private float _wallJumpTimeCounter;
+    public float _wallJumpTimeCounter;
     [SerializeField]
     private Vector2 _wallJumpForce;
 
@@ -90,9 +91,9 @@ public class PlayerLocomotion : MonoBehaviour
         }
     }
 
-    public void HandleWallSlide(float movementInput, bool isWalled, bool isGrounded)
+    public void HandleWallSlide(float movementInput, bool isGrounded)
     {
-        if(isWalled && !isGrounded)
+        if(_playerManager.IsWalled() && !isGrounded)
         {
             _playerManager.isWallSliding = true;
             _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -_wallSlideSpeed, float.MaxValue));
