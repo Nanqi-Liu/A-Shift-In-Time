@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FullScreenShockWave
-  m_Shader: {fileID: -6465566751694194690, guid: 6a2fa4cefcecb014abe766415317e92a, type: 3}
+  m_Name: FullScreenBorderEffect
+  m_Shader: {fileID: -6465566751694194690, guid: f7c7a4d24a8bb294f8b0a347c9aed86e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -37,10 +37,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Magnification: -0.1
-    - _Radius: 2
-    - _Size: 0.15
-    - _SizeRatio: 1.777778
+    - _AspectRatio: 1.777778
+    - _Intensity: 0
+    - _Multiplyer: 0.45
+    - _Opacity: 0
+    - _Power: 4.71
+    - _Radius: 0.9
+    - _Size: 0.3
+    - _VoronoiCellDensity: 9.06
+    - _VoronoiPower: 2
     m_Colors:
-    - _FocalPoint: {r: 0.49126208, g: 0.47647476, b: 10, a: 0}
+    - _Color: {r: 0, g: 0.8, b: 0, a: 0}
+    - _FocalPoint: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

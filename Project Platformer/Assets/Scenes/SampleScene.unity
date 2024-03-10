@@ -2058,7 +2058,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.37, z: -9}
+  m_LocalPosition: {x: -0.43, y: 0.53, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2650,7 +2650,7 @@ Transform:
   m_GameObject: {fileID: 878357261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.37, z: -9}
+  m_LocalPosition: {x: -0.43, y: 0.53, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3072,6 +3072,9 @@ MonoBehaviour:
   playerTransform: {fileID: 1200620562}
   _fullScreenShockwaveEffect: {fileID: 2464328576479380644, guid: e71aecdaae59d774b8e64b90984bf148, type: 2}
   _spriteChangeableMaterial: {fileID: 2100000, guid: 5dbce2bb53b7e0a4f9467a4b451096ea, type: 2}
+  _fullScreenBorderEffect: {fileID: 5777261908234601360, guid: e71aecdaae59d774b8e64b90984bf148, type: 2}
+  _presentColor: {r: 0, g: 0.8, b: 0, a: 0}
+  _futureColor: {r: 0.8, g: 0, b: 0.8, a: 0}
   _effectDuration: 1
 --- !u!4 &1147885755
 Transform:
@@ -3102,6 +3105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _presentTilemap: {fileID: 1074428203}
   _futureTilemap: {fileID: 820867611}
+  _playerTransform: {fileID: 1200620562}
   isFuture: 0
 --- !u!4 &1200620562 stripped
 Transform:
@@ -3118,11 +3122,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4534071378904281119, guid: 65d6f9d061b2426429550184721b54c1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.65
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 4534071378904281119, guid: 65d6f9d061b2426429550184721b54c1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.37
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 4534071378904281119, guid: 65d6f9d061b2426429550184721b54c1, type: 3}
       propertyPath: m_LocalPosition.z
