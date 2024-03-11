@@ -85,12 +85,14 @@ public class PlayerManager : MonoBehaviour
     public void JumpCallBack()
     {
         Debug.Log("Jump");
+        _jumpBufferTimeCounter = 0;
         TimeshiftManager.instance.ShiftTime();
     }
 
     public void WallJumpCallBack()
     {
         Debug.Log("WallJump");
+        inputHandler.jumpFlag = false;
         TimeshiftManager.instance.ShiftTime();
     }
 }
