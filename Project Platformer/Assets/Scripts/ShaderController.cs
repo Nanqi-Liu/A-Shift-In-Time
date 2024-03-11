@@ -17,8 +17,6 @@ public class ShaderController : MonoBehaviour
     private Color _presentColor;
     [SerializeField]
     private Color _futureColor;
-    [SerializeField]
-    private float _effectDuration = 1f;
 
     private Material _fullScreenShockwaveEffectMaterial;
     private Material _fullScreenBorderEffectMaterial;
@@ -53,7 +51,7 @@ public class ShaderController : MonoBehaviour
         _fullScreenBorderEffectMaterial.SetColor(_shaderColorID, _presentColor);
     }
 
-    public void StartShaderTransformation()
+    public void StartShaderTransformation(float duration)
     {
         //Debug.Log("Start Shader");
         if (_lastCo != null)
@@ -67,11 +65,11 @@ public class ShaderController : MonoBehaviour
             _isShaderTransformationRunning = false;
         }
             
-        _lastCo = ShaderTransformation();
+        _lastCo = ShaderTransformation(duration);
         StartCoroutine(_lastCo);
     }
 
-    private IEnumerator ShaderTransformation()
+    private IEnumerator ShaderTransformation(float duration)
     {
         _isShaderTransformationRunning = true;
         _fullScreenShockwaveEffect.SetActive(true);
@@ -83,12 +81,12 @@ public class ShaderController : MonoBehaviour
             _spriteChangeableMaterial.GetInt(_spriteShaderInvertedID) == 0 ? _futureColor : _presentColor);
 
         float elapsedTime = 0f;
-        while (elapsedTime < _effectDuration)
+        while (elapsedTime < duration)
         {
             elapsedTime += Time.fixedDeltaTime;
             //Debug.Log(elapsedTime);
 
-            float radius = Mathf.Lerp(0, 1, (elapsedTime / _effectDuration));
+            float radius = Mathf.Lerp(0, 1, (elapsedTime / duration));
             _fullScreenShockwaveEffectMaterial.SetFloat(_shaderRadiusID, radius * 2);
             _spriteChangeableMaterial.SetFloat(_shaderRadiusID, radius);
             _fullScreenBorderEffectMaterial.SetFloat(_shaderOpacity, 1 - radius);

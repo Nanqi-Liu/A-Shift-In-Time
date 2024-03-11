@@ -17,6 +17,12 @@ public class TimeshiftManager : MonoBehaviour
     private GameObject _futureTilemap;
     [SerializeField]
     private Transform _playerTransform;
+    [SerializeField]
+    private GameObject _backgroundGameObject;
+    private BackgroundColorShift[] _backgroundColorShift;
+
+    [SerializeField]
+    private float _effectDuration = 1f;
 
     private TilemapCollider2D _tcPresent;
     private TilemapCollider2D _tcFuture;
@@ -33,6 +39,8 @@ public class TimeshiftManager : MonoBehaviour
     {
         _tcPresent = _presentTilemap.GetComponent<TilemapCollider2D>();
         _tcFuture = _futureTilemap.GetComponent<TilemapCollider2D>();
+
+        _backgroundColorShift = _backgroundGameObject.GetComponentsInChildren<BackgroundColorShift>();
 
         _tcFuture.enabled = false;
         shaderController.InitShaders();
@@ -79,6 +87,16 @@ public class TimeshiftManager : MonoBehaviour
             _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
         }
 
-        shaderController.StartShaderTransformation();
+        // Starts transition
+        BackgroundColorTransition();
+        shaderController.StartShaderTransformation(_effectDuration);
+    }
+
+    private void BackgroundColorTransition()
+    {
+        foreach (BackgroundColorShift bgcs in _backgroundColorShift)
+        {
+            StartCoroutine(bgcs.ShiftColor(isFuture, _effectDuration / 2));
+        }
     }
 }
