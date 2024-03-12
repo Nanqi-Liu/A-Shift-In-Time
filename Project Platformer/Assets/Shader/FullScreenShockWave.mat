@@ -42,5 +42,5 @@ Material:
     - _Size: 0.15
     - _SizeRatio: 1.777778
     m_Colors:
-    - _FocalPoint: {r: 0.70812416, g: 0.79329216, b: 11, a: 0}
+    - _FocalPoint: {r: 0.25812146, g: 0.7979983, b: 11, a: 0}
   m_BuildTextureStacks: []

@@ -46,19 +46,6 @@ public class TimeshiftManager : MonoBehaviour
         shaderController.InitShaders();
     }
 
-
-    //private void OnEnable()
-    //{
-    //    inputActions.Test.Switch.performed += StartShaderTransformation;
-    //    inputActions.Test.Switch.Enable();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    inputActions.Test.Switch.performed -= StartShaderTransformation;
-    //    inputActions.Test.Switch.Disable();
-    //}
-
     public void ShiftTime()
     {
         TilemapCollider2D enabledCollider;
@@ -86,6 +73,7 @@ public class TimeshiftManager : MonoBehaviour
             Vector2 newPosition = edgePoint + (edgePoint - (Vector2)_playerTransform.position).normalized * 0.1f;
             _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
         }
+   
 
         // Starts transition
         BackgroundColorTransition();
@@ -98,5 +86,18 @@ public class TimeshiftManager : MonoBehaviour
         {
             StartCoroutine(bgcs.ShiftColor(isFuture, _effectDuration / 2));
         }
+    }
+
+    private void StoneTransition()
+    {
+        // Cast stone if in future
+        //if (isFuture)
+        //{
+        //    RaycastHit2D hit = Physics2D.Raycast(stoneObject.transform.position, Vector2.down, 20f, groundLayer);
+        //    if (hit.collider != null)
+        //    {
+        //        Debug.Log(hit.point);
+        //    }
+        //}
     }
 }

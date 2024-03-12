@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 1591473555257533654}
   - component: {fileID: 5607290164904077957}
   - component: {fileID: 1833089953749065077}
-  m_Layer: 0
+  - component: {fileID: 7365126349909601022}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 556c9cadbbf110845bd3435903b93c14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -175,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFacingRight: 1
-  isGrounded: 0
+  isGrounded: 1
   isWallSliding: 0
   isWallJumping: 0
   _coyoteTime: 0.2
@@ -239,3 +240,20 @@ MonoBehaviour:
   _wallLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &7365126349909601022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198647556092475479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b8959c47487184ca1b6e2d171c6378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particles:
+  - particleName: Jump
+    particle: {fileID: 7203433505203842256, guid: 8542147f943384b4c88703d2f534f706, type: 3}
+  - particleName: Land
+    particle: {fileID: 5392854575355583245, guid: 4e8097c570441b3468ca821cb629f18c, type: 3}

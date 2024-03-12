@@ -120,8 +120,7 @@ public class PlayerLocomotion : MonoBehaviour
         }
 
         if (_wallJumpTimeCounter > 0 && jumpFlag)
-        {
-            _playerManager.WallJumpCallBack();
+        { 
             _playerManager.isWallJumping = true;
             _rb.velocity = new Vector2(_wallJumpDirection * _wallJumpForce.x, _maxJumpForce * _wallJumpForce.y);
 
@@ -129,6 +128,7 @@ public class PlayerLocomotion : MonoBehaviour
             {
                 Flip();
             }
+            _playerManager.WallJumpCallBack(_wallJumpDirection);
 
             Invoke(nameof(StopWallJump), _wallJumpDuration);
         }

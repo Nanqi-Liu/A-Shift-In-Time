@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
     InputHandler inputHandler;
     PlayerLocomotion playerLocomotion;
     PlayerDetection playerDetection;
+    PlayerParticleHandler playerParticleHandler;
 
     public bool isFacingRight = true;
     public bool isGrounded;
@@ -24,6 +25,7 @@ public class PlayerManager : MonoBehaviour
         inputHandler = GetComponent<InputHandler>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerDetection = GetComponent<PlayerDetection>();
+        playerParticleHandler = GetComponent<PlayerParticleHandler>();
     }
 
     private void Start()
@@ -47,6 +49,10 @@ public class PlayerManager : MonoBehaviour
         // Coyote time
         if (playerDetection.GroundDetection())
         {
+            if (isGrounded == false)
+            {
+                LandCallBack();
+            }
             isGrounded = true;
             coyoteTimeCounter = _coyoteTime;
             playerLocomotion._wallJumpTimeCounter = 0;
@@ -87,12 +93,24 @@ public class PlayerManager : MonoBehaviour
         Debug.Log("Jump");
         _jumpBufferTimeCounter = 0;
         TimeshiftManager.instance.ShiftTime();
+        Vector3 particlePos = (transform.position - Vector3.up * 0.5f) + Vector3.forward * 10f;
+        playerParticleHandler.PlayParticle("Jump", particlePos, transform.rotation, transform);
     }
 
-    public void WallJumpCallBack()
+    public void WallJumpCallBack(float wallJumpDirection)
     {
         Debug.Log("WallJump");
         inputHandler.jumpFlag = false;
         TimeshiftManager.instance.ShiftTime();
+        Vector3 particlePos = (transform.position + 0.5f * wallJumpDirection * Vector3.left) + Vector3.forward * 10f;
+        playerParticleHandler.PlayParticle("Jump", particlePos,
+            Quaternion.Euler(90 * -wallJumpDirection * Vector3.forward), transform);
+    }
+
+    private void LandCallBack()
+    {
+        Debug.Log("Landed");
+        Vector3 particlePos = (transform.position - Vector3.up * 0.5f) + Vector3.forward * 10f;
+        playerParticleHandler.PlayParticle("Land", particlePos, transform.rotation, transform); 
     }
 }
