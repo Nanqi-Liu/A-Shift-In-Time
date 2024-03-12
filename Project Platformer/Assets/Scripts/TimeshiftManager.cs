@@ -78,6 +78,9 @@ public class TimeshiftManager : MonoBehaviour
         // Starts transition
         BackgroundColorTransition();
         shaderController.StartShaderTransformation(_effectDuration);
+
+        // Play SFX
+        AudioManager.instance.PlaySound("Timeshift");
     }
 
     private void BackgroundColorTransition()

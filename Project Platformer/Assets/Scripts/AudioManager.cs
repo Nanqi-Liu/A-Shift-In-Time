@@ -19,12 +19,8 @@ public class AudioManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        for(int i = 0; i < sounds.Length; i++)
+        for (int i = 0; i < sounds.Length; i++)
         {
             GameObject soundObject = new GameObject("Sound_" + i + "_" + sounds[i].soundName);
             sounds[i].SetSource(soundObject.AddComponent<AudioSource>());

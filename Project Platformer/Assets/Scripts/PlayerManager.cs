@@ -95,6 +95,8 @@ public class PlayerManager : MonoBehaviour
         TimeshiftManager.instance.ShiftTime();
         Vector3 particlePos = (transform.position - Vector3.up * 0.5f) + Vector3.forward * 10f;
         playerParticleHandler.PlayParticle("Jump", particlePos, transform.rotation, transform);
+
+        AudioManager.instance.PlaySound("Jump");
     }
 
     public void WallJumpCallBack(float wallJumpDirection)
@@ -105,6 +107,8 @@ public class PlayerManager : MonoBehaviour
         Vector3 particlePos = (transform.position + 0.5f * wallJumpDirection * Vector3.left) + Vector3.forward * 10f;
         playerParticleHandler.PlayParticle("Jump", particlePos,
             Quaternion.Euler(90 * -wallJumpDirection * Vector3.forward), transform);
+
+        AudioManager.instance.PlaySound("Jump");
     }
 
     private void LandCallBack()
