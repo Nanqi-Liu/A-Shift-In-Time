@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,7 +176,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFacingRight: 1
   isGrounded: 0
-  isWalled: 0
   isWallSliding: 0
   isWallJumping: 0
   _coyoteTime: 0.2
@@ -214,7 +213,9 @@ MonoBehaviour:
   _jumpCutOffGravityMultiplier: 3
   _wallSlideSpeed: 3
   _wallJumpDuration: 0.4
+  _wallJumpDirection: 0
   _wallJumpTimeWindow: 0.2
+  _wallJumpTimeCounter: 0
   _wallJumpForce: {x: 5, y: 1}
 --- !u!114 &1833089953749065077
 MonoBehaviour:
