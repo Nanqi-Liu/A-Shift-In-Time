@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.InputSystem;
 
 public class TimeshiftManager : MonoBehaviour
 {
     public static TimeshiftManager instance;
-    PlayerControls inputActions;
 
     private ShaderController shaderController;
 
@@ -31,7 +29,6 @@ public class TimeshiftManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        inputActions = new PlayerControls();
         shaderController = GetComponent<ShaderController>(); 
     }
 
@@ -73,8 +70,8 @@ public class TimeshiftManager : MonoBehaviour
             Vector2 newPosition = edgePoint + (edgePoint - (Vector2)_playerTransform.position).normalized * 0.1f;
             _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
         }
-   
 
+        StoneTransition(isFuture);
         // Starts transition
         BackgroundColorTransition();
         shaderController.StartShaderTransformation(_effectDuration);
@@ -91,16 +88,8 @@ public class TimeshiftManager : MonoBehaviour
         }
     }
 
-    private void StoneTransition()
+    private void StoneTransition(bool isToFuture)
     {
-        // Cast stone if in future
-        //if (isFuture)
-        //{
-        //    RaycastHit2D hit = Physics2D.Raycast(stoneObject.transform.position, Vector2.down, 20f, groundLayer);
-        //    if (hit.collider != null)
-        //    {
-        //        Debug.Log(hit.point);
-        //    }
-        //}
+        StoneManager.instance.CastStones(isToFuture);
     }
 }
