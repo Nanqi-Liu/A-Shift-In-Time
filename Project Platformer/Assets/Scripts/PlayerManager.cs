@@ -39,6 +39,8 @@ public class PlayerManager : MonoBehaviour
         JumpBuffer();
         Locomotions();
 
+        PlayWallSlidesParticle();
+
         inputHandler.jumpFlag = false;
     }
 
@@ -88,6 +90,14 @@ public class PlayerManager : MonoBehaviour
         return playerDetection.WallDetection(transform.localScale.x > 0);
     }
 
+    public void PlayWallSlidesParticle()
+    {
+        if (isWallSliding)
+            playerParticleHandler.PlayWallSlideParticle();
+        else
+            playerParticleHandler.StopWallSlideParticle();
+    }
+
     public void JumpCallBack()
     {
         Debug.Log("Jump");
@@ -114,6 +124,7 @@ public class PlayerManager : MonoBehaviour
     private void LandCallBack()
     {
         Debug.Log("Landed");
+        isWallJumping = false;
         Vector3 particlePos = (transform.position - Vector3.up * 0.5f) + Vector3.forward * 10f;
         playerParticleHandler.PlayParticle("Land", particlePos, transform.rotation, transform); 
     }
