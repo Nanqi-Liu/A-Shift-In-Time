@@ -13,12 +13,20 @@ public class RoomTransition : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _virtualCameraGameObject.SetActive(true);
+        if (collision.tag == "Player")
+        {
+            _virtualCameraGameObject.SetActive(true);
+            Debug.Log("Player enter camera: " + transform.name);
+        }
         
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _virtualCameraGameObject.SetActive(false);
+        if (collision.tag == "Player")
+        {
+            _virtualCameraGameObject.SetActive(false);
+            Debug.Log("Player exit camera: " + transform.name);
+        }
     }
 }

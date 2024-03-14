@@ -64,12 +64,12 @@ public class TimeshiftManager : MonoBehaviour
         }
 
         // Get player out if player clip in
-        if (enabledCollider.composite.bounds.Contains((Vector2)_playerTransform.position))
-        {
-            Vector2 edgePoint = enabledCollider.composite.ClosestPoint(_playerTransform.position);
-            Vector2 newPosition = edgePoint + (edgePoint - (Vector2)_playerTransform.position).normalized * 0.1f;
-            _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
-        }
+        //if (enabledCollider.composite.bounds.Contains((Vector2)_playerTransform.position))
+        //{
+        //    Vector2 edgePoint = enabledCollider.composite.ClosestPoint(_playerTransform.position);
+        //    Vector2 newPosition = edgePoint + (edgePoint - (Vector2)_playerTransform.position).normalized * 0.1f;
+        //    _playerTransform.position = new Vector3(newPosition.x, newPosition.y, _playerTransform.position.z);
+        //}
 
         StoneTransition(isFuture);
         // Starts transition

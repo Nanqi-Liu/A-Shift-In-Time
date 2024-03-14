@@ -38,13 +38,10 @@ public class PlayerDetection : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (Selection.Contains(gameObject))
-        {
-            // Ground Detection Gizmo
-            Gizmos.DrawWireCube(transform.position - transform.up * _groundCastDistance, _boxSize);
+        // Ground Detection Gizmo
+        Gizmos.DrawWireCube(transform.position - transform.up * _groundCastDistance, _boxSize);
 
-            // Wall Detection Gizmo
-            Gizmos.DrawWireSphere(transform.position + (isFacingRight ? transform.right : -transform.right) * _wallCastDistance, _wallCheckRadius);
-        }
+        // Wall Detection Gizmo
+        Gizmos.DrawWireSphere(transform.position + (isFacingRight ? transform.right : -transform.right) * _wallCastDistance, _wallCheckRadius);
     }
 }

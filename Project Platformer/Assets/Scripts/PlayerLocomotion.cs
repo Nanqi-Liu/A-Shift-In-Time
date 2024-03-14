@@ -96,6 +96,7 @@ public class PlayerLocomotion : MonoBehaviour
         if(_playerManager.IsWalled() && !isGrounded)
         {
             _playerManager.isWallSliding = true;
+            _playerManager.coyoteTimeCounter = 0;
             _rb.velocity = new Vector2(_rb.velocity.x, Mathf.Clamp(_rb.velocity.y, -_wallSlideSpeed, float.MaxValue));
         }
         else
@@ -122,6 +123,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (_wallJumpTimeCounter > 0 && jumpFlag)
         { 
             _playerManager.isWallJumping = true;
+            _wallJumpTimeCounter = 0;
             _rb.velocity = new Vector2(_wallJumpDirection * _wallJumpForce.x, _maxJumpForce * _wallJumpForce.y);
 
             if (transform.localScale.x != _wallJumpDirection)

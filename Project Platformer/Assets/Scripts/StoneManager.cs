@@ -42,7 +42,7 @@ public class StoneManager : MonoBehaviour
         {
             if (isToFuture)
             {
-                RaycastHit2D hit = Physics2D.Raycast(_stones[i].transform.position + Vector3.down * 0.5f, Vector2.down, float.MaxValue, _groundLayer);
+                RaycastHit2D hit = Physics2D.Raycast(_stones[i].transform.position, Vector2.down, float.MaxValue, _groundLayer);
                 if (hit.collider != null)
                 {
                     _stones[i].futureStone.transform.position = hit.point + Vector2.up * 0.5f;

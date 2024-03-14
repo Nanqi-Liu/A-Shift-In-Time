@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8661049946204893130}
   - component: {fileID: 7375477899337359940}
   - component: {fileID: 7475107770085004011}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.97, y: 0.97}
+  m_Size: {x: 0.98, y: 0.98}
   m_EdgeRadius: 0
 --- !u!114 &7475107770085004011
 MonoBehaviour:
