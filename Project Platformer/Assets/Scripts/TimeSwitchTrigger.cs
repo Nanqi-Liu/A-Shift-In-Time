@@ -10,7 +10,7 @@ public class TimeSwitchTrigger : MonoBehaviour
         {
             TimeshiftManager.instance.ShiftTime();
             // Deactivate when triggered
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
